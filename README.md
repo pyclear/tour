@@ -1,9 +1,10 @@
 《Go 语言之旅》是官方 Go Tour 的中文翻译版。
-要安装到本地，请先安装 Go，之后执行以下命令：
+这份fork将代码运行的环境修改为docker，并禁止了自动打开浏览器，
+你需要在docker容器运行之后手动大开浏览器输入localhost:3999
+要安装到本地，请先安装docker，之后执行以下命令：
 
-	$ go get -u github.com/Go-zh/tour/gotour
-	$ cd $GOPATH/bin
-	$ ./gotour
+	$./run.sh
+	
 
 （如果安装过程中出现 `package` 或 `import`
 字样的错误提示，那么说明依赖库的导入路径又挂了。
