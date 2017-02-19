@@ -92,8 +92,8 @@ func main() {
 	if host == "" {
 		host = "localhost"
 	}
-	if host != "127.0.0.1" && host != "localhost" {
-		log.Print(localhostWarning)
+	if host != "0.0.0.0"  {
+		log.Print(rundockerWarning)
 	}
 	httpAddr = host + ":" + port
 
@@ -114,14 +114,14 @@ func main() {
 	imgDir := filepath.Join(root, "static", "img")
 	http.Handle("/favicon.ico", http.FileServer(http.Dir(imgDir)))
 
-	go func() {
-		url := "http://" + httpAddr
-		if waitServer(url) && *openBrowser && startBrowser(url) {
-			log.Printf("A browser window should open. If not, please visit %s", url)
-		} else {
-			log.Printf("Please open your web browser and visit %s", url)
-		}
-	}()
+	//go func() {
+	//	url := "http://" + httpAddr
+	//	if waitServer(url) && *openBrowser && startBrowser(url) {
+	//		log.Printf("A browser window should open. If not, please visit %s", url)
+	//	} else {
+	//		log.Printf("Please open your web browser and visit %s", url)
+	//	}
+	//}()
 	log.Fatal(http.ListenAndServe(httpAddr, nil))
 }
 
@@ -144,12 +144,12 @@ func lessonHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-const localhostWarning = `
+const rundockerWarning = `
 WARNING!  WARNING!  WARNING!
 
-I appear to be listening on an address that is not localhost.
+I appear to be listening on an address that is not 0.0.0.0.
 Anyone with access to this address and port will have access
-to this machine as the user running gotour.
+to docker machine as the user running gotour.
 
 If you don't understand this message, hit Control-C to terminate this process.
 
